@@ -3,6 +3,7 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import { Link, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import MovieInfo from "./pages/MovieInfo";
 
 const { Header, Content, Footer } = Layout;
 
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/movie/:id">
+              <MovieInfo />
             </Route>
           </Switch>
         </div>

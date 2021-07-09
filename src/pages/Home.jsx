@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Pagination, Spin } from "antd";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -17,12 +18,22 @@ export default function Home() {
       .then((data) => setLatestMoviesData(data))
       .finally(() => setLoding(false));
 
-    console.log(page, total_results);
+    console.log(latestmoviesData);
+  }
+  function handleClick(id) {
+    // fetch(
+    //   `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => setLatestMoviesData(data));
+    console.log(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
+    );
   }
 
   useEffect(() => {
     fetchMovies(1);
-    console.log(latestmoviesData);
+    // console.log(latestmoviesData);
   }, []);
 
   return (
@@ -31,17 +42,20 @@ export default function Home() {
         <Row gutter={[16, 16]}>
           {results.map((movie) => (
             <Col key={movie.id} xs={24} sm={12} md={8} lg={6} xl={4}>
-              <Card
-                hoverable
-                cover={
-                  <img
-                    alt={movie.title}
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  />
-                }
-              >
-                <Meta title={movie.original_title} />
-              </Card>
+              <Link to={`/movie/${movie.id}`}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt={movie.title}
+                      src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                      onClick={() => handleClick(movie.id)}
+                    />
+                  }
+                >
+                  <Meta title={movie.original_title} />
+                </Card>
+              </Link>
             </Col>
           ))}
         </Row>

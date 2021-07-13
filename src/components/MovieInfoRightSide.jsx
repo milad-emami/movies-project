@@ -10,15 +10,15 @@ const { Title } = Typography;
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const MovieInfoRightSide = ({ id, movieInfo }) => {
-  const [detailMovies, setDetailMovies] = useState({});
-  useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
-    )
-      .then((response) => response.json())
-      .then((data) => setDetailMovies(data));
-  }, []);
+const MovieInfoRightSide = ({ movieInfo }) => {
+  //   const [detailMovies, setDetailMovies] = useState({});
+  //   useEffect(() => {
+  //     fetch(
+  //       `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => setDetailMovies(data));
+  //   }, []);
 
   return (
     <Layout style={{ marginLeft: "24px" }}>
@@ -30,7 +30,13 @@ const MovieInfoRightSide = ({ id, movieInfo }) => {
         <Col flex={2}>
           <Row>
             <Col>
-              <StarFilled style={{ fontSize: "16px", color: "#ff9270",borderColor:'black' }} />
+              <StarFilled
+                style={{
+                  fontSize: "16px",
+                  color: "#ff9270",
+                  borderColor: "black",
+                }}
+              />
             </Col>
             <Col>
               <Row>
@@ -45,7 +51,7 @@ const MovieInfoRightSide = ({ id, movieInfo }) => {
           </Row>
         </Col>
         <Col flex={3}>
-          Rate This Movie: 
+          Rate This Movie:
           <RateTool />
         </Col>
       </Row>
@@ -56,7 +62,7 @@ const MovieInfoRightSide = ({ id, movieInfo }) => {
           <p>{movieInfo.overview}</p>
         </TabPane>
         <TabPane tab="REVIEWS" key="2">
-        
+          <Tab2 id={movieInfo.id} />
         </TabPane>
         <TabPane tab="CAST&CREW" key="3">
           Content of Tab Pane 3

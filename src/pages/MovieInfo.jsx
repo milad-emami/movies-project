@@ -17,7 +17,7 @@ export default function MovieInfo() {
       .then((response) => response.json())
       .then((data) => setDetailMovies(data));
   }, []);
-  console.log(detailMovies);
+  //console.log(detailMovies);
 
   return (
     <Layout>

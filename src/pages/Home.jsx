@@ -18,22 +18,15 @@ export default function Home() {
       .then((data) => setLatestMoviesData(data))
       .finally(() => setLoding(false));
 
-    console.log(latestmoviesData);
   }
   function handleClick(id) {
-    // fetch(
+    // console.log(
     //   `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => setLatestMoviesData(data));
-    console.log(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US`
-    );
+    // );
   }
 
   useEffect(() => {
     fetchMovies(1);
-    // console.log(latestmoviesData);
   }, []);
 
   return (

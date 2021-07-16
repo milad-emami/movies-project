@@ -1,0 +1,28 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 40px 5fr;
+  grid-template-areas:
+    "icon auther"
+    "icon rate"
+    "icon date"
+    "footer footer";
+    column-gap: 30px;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  grid-area: icon;
+}
+.auther {
+  grid-area: auther;
+}
+.rate {
+  grid-area: rate;
+}
+.date {
+  grid-area: date;
+  font-size: x-small;
+}
+.footer {
+  grid-area: footer;
+}

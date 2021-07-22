@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Pagination, Spin } from "antd";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import useMovieDb from "../hooks/useMovieDb";
+import useMovieDb from "../hooks/useMovieDB";
 
 const { Meta } = Card;
 

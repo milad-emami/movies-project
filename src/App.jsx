@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Row, Col } from "antd";
 import { Link, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import MovieInfo from "./pages/MovieInfo";
+import Search from "./components/Search/Search";
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,6 +31,11 @@ function App() {
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb> */}
+        <Row>
+          <Col span={24}>
+            <Search />
+          </Col>
+        </Row>
         <div
           className="site-layout-background"
           style={{ padding: 24, minHeight: 380, marginTop: 48 }}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Typography, Tabs, Row, Col, Divider } from "antd";
+import { Layout, Typography, Tabs, Row, Col, Divider, Rate } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import RateTool from "./RateTool";
 import Tab2 from "../pages/Tabs/Tab2";
 import Cast from "../pages/Cast";
+import PopularMoviesSwiper from "../components/PopularMoviesSwiper/PopularMoviesSwiper";
 
 const { TabPane } = Tabs;
 
@@ -23,8 +24,31 @@ const MovieInfoRightSide = ({ movieInfo }) => {
           ? movieInfo.release_date?.split("-")[0]
           : "loading"}
       </Title>
+      <PopularMoviesSwiper />
       <Divider></Divider>
-      <Row>
+      <div
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
+        <div style={{ display: "flex" }}>
+          <StarFilled
+            style={{
+              fontSize: "18px",
+              color: "#ff9270",
+              marginRight: "10px",
+              borderColor: "black",
+            }}
+          />
+          <p>
+            <span>8.1</span>/10
+          </p>
+        </div>
+        <div style={{ justifyContent: "flex-end" }}>
+          Rate This Movie:
+          <Rate allowHalf value={movieInfo.vote_average / 2} />
+        </div>
+      </div>
+
+      {/* <Row>
         <Col flex={2}>
           <Row>
             <Col>
@@ -50,9 +74,9 @@ const MovieInfoRightSide = ({ movieInfo }) => {
         </Col>
         <Col flex={3}>
           Rate This Movie:
-          <RateTool />
+          <Rate allowHalf value={movieInfo.vote_average / 2} />
         </Col>
-      </Row>
+      </Row> */}
       <Divider></Divider>
 
       <Tabs defaultActiveKey="1" centered>

@@ -1,0 +1,9 @@
+@import "../../assets/variables.scss";
+
+.root {
+  background-color: $main-color;
+  padding-bottom: 48px;
+  margin-bottom: 32px;
+  background-size: cover;
+  background-position: center;
+}

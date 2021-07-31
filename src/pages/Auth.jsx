@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Container from "../components/Layout/Container";
 import { UserContext } from "../context/UserContext";
+import accountService from "../service/accountService";
+import authService from "../service/authService";
 
 export default function Auth() {
   const { setSessionId } = useContext(UserContext);
@@ -12,24 +14,18 @@ export default function Auth() {
   );
   useEffect(() => {
     if (requestToken) {
-      const url =
-        "https://api.themoviedb.org/3/authentication/session/new?api_key=293a7d3b6bf12a19fa75475364fcbd0f";
-      fetch(url, {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          request_token: requestToken,
-        }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          setSessionId(data.session_id);
-          history.replace("/");
+      authService.createSession(requestToken).then((data) => {
+        setSessionId(data.session_id);
+        history.replace("/");
+
+        accountService.getDetails().then((data) => {
+          message.success(
+            `${data.name || data.username} Welcome to Mapsa Movies!`
+          );
         });
+      });
     }
-  }, [requestToken]);
+  }, []);
 
   return (
     <Container>

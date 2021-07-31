@@ -1,4 +1,4 @@
-import request from "../helpers/request";
+import request from "../helper/request";
 
 function getDetails() {
   return request.get({ path: "account" });

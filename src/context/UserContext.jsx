@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import accountService from "../service/accountService";
 
 export const UserContext = createContext({});
 
@@ -13,10 +14,12 @@ export default function UserProvider({ children }) {
   useEffect(() => {
     if (sessionId) {
       localStorage.setItem("session_id", sessionId);
-      fetch(`
-        https://api.themoviedb.org/3/account?api_key=293a7d3b6bf12a19fa75475364fcbd0f&session_id=${sessionId}`)
-        .then((r) => r.json())
-        .then((data) => setUser(data));
+
+      accountService.getDetails().then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
+
+        setUser(data);
+      });
     }
   }, [sessionId]);
 

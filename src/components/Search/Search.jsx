@@ -116,7 +116,10 @@ export default function Search() {
         onSearch={(e) => setQuery(e)}
         //onSelect={(e) => handleSearch(e)}
       >
-        <Input.Search size="large" placeholder="input here" />
+        <Input.Search
+          size="large"
+          placeholder="Search movies, people and tv shows..."
+        />
       </AutoComplete>
     </div>
   );

@@ -5,14 +5,17 @@ import HeroHeaderProvider from "./context/HeroHeaderContext";
 import App from "./App";
 import "antd/dist/antd.css";
 import "./assets/css/global.scss";
+import UserProvider from "./context/UserContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <HeroHeaderProvider>
-        <App />
-      </HeroHeaderProvider>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <HeroHeaderProvider>
+          <App />
+        </HeroHeaderProvider>
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

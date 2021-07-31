@@ -13,7 +13,6 @@ import slugify from "../helper/slugify";
 SwiperCore.use([Pagination, Autoplay]);
 
 export default function CustomeSwiper({ slides, onHoverSlide }) {
-  console.log(slides);
   return (
     <Swiper
       className="mySwiper"

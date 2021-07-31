@@ -5,6 +5,7 @@ import Container from "../Layout/Container";
 import classes from "./HeroHeader.module.scss";
 import PopularMoviesSwiper from "../PopularMoviesSwiper/PopularMoviesSwiper";
 import { HeroHeaderContext } from "../../context/HeroHeaderContext";
+import Nav from "./Nav";
 
 export default function HeroHeader({ children }) {
   const [bg] = useContext(HeroHeaderContext);
@@ -15,13 +16,9 @@ export default function HeroHeader({ children }) {
         backgroundImage: `linear-gradient(rgb(3 13 24), rgb(3 13 24 / 40%)), url(${bg})`,
       }}
     >
-      <nav>menu...</nav>
+      <Nav />
       <Container>
-        <Row>
-          <Col span={24}>
-            <Search />
-          </Col>
-        </Row>
+        <Search />
       </Container>
 
       {children && (

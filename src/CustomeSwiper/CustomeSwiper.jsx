@@ -7,8 +7,8 @@ import "swiper/components/pagination/pagination.min.css";
 
 import SwiperCore, { Pagination, Autoplay } from "swiper/core";
 import MovieCard from "../components/MovieCard/MovieCard";
-import image from "../helper/image";
-import slugify from "../helper/slugify";
+import image from "../helpers/image";
+import slugify from "../helpers/slugify";
 
 SwiperCore.use([Pagination, Autoplay]);
 

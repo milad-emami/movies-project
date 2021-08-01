@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from "react";
 import { Input, AutoComplete, Rate, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import React, { useState, useEffect, isValidElement } from "react";
 import classes from "./Search.module.scss";
 import useDebounce from "../../hooks/useDebounce";
+import { useHistory } from "react-router-dom";
+import slugify from "../../helpers/slugify";
 
 const renderTitle = (title) => (
   <span>
@@ -36,33 +38,49 @@ const renderItem = (title, id, label) => ({
 });
 
 export default function Search() {
+  const history = useHistory();
   const [query, setQuery] = useState("");
-  const [searchItems, setSearchItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [searchedItems, setSearchedItems] = useState([]);
   const debouncedQuery = useDebounce(query, 300);
+
+  function handleLoadMovie(id) {
+    const data = searchedItems.find((d) => d.id == id);
+    setInputValue("");
+
+    switch (data.media_type) {
+      case "movie":
+        return history.push(`/movies/${data.id}/${slugify(data.title)}`);
+      case "tv":
+        return history.push(`/tv-shows/${data.id}/${slugify(data.name)}`);
+      case "person":
+        return history.push(`/celebrities/${data.id}/${slugify(data.name)}`);
+    }
+  }
 
   useEffect(() => {
     if (debouncedQuery) {
       fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=293a7d3b6bf12a19fa75475364fcbd0f&language=en-US&page=1&include_adult=false&query=${query}`
+        `https://api.themoviedb.org/3/search/multi?api_key=26b842803ccbaba051d1fd7169b8d506&language=en-US&page=1&include_adult=false&query=${query}`
       )
         .then((r) => r.json())
-        .then((data) => setSearchItems(data.results));
+        .then((data) => setSearchedItems(data.results));
     }
   }, [debouncedQuery]);
 
-  function makeOption() {
-    if (searchItems.length && query) {
+  function makeOptions() {
+    if (searchedItems.length && query) {
       return [
         {
           label: renderTitle("Movies"),
-          options: searchItems
+          options: searchedItems
             .filter((item) => item.media_type === "movie")
             .map((i) =>
               renderItem(
                 i.title,
                 i.id,
                 <Rate
-                  style={{ fontSize: 10 }}
+                  style={{ fontSize: 13 }}
                   allowHalf
                   value={i.vote_average / 2}
                 />
@@ -70,15 +88,15 @@ export default function Search() {
             ),
         },
         {
-          label: renderTitle("Tv Shows"),
-          options: searchItems
+          label: renderTitle("TV Shows"),
+          options: searchedItems
             .filter((item) => item.media_type === "tv")
             .map((i) =>
               renderItem(
                 i.name,
                 i.id,
                 <Rate
-                  style={{ fontSize: 10 }}
+                  style={{ fontSize: 13 }}
                   allowHalf
                   value={i.vote_average / 2}
                 />
@@ -87,7 +105,7 @@ export default function Search() {
         },
         {
           label: renderTitle("People"),
-          options: searchItems
+          options: searchedItems
             .filter((item) => item.media_type === "person")
             .map((i) =>
               renderItem(
@@ -103,18 +121,20 @@ export default function Search() {
               )
             ),
         },
-      ];
+      ].filter((type) => type.options.length);
     }
+
+    return null;
   }
 
   return (
     <div className={classes.root}>
       <AutoComplete
-        dropdownClassName="certain-category-search-dropdown"
-        dropdownMatchSelectWidth={500}
-        options={makeOption()}
+        options={makeOptions()}
         onSearch={(e) => setQuery(e)}
-        //onSelect={(e) => handleSearch(e)}
+        onSelect={handleLoadMovie}
+        value={inputValue}
+        onChange={setInputValue}
       >
         <Input.Search
           size="large"

@@ -1,0 +1,25 @@
+@import "../../assets/variables.scss";
+
+.root {
+  margin-top: 24px;
+  ul {
+    padding: 0;
+    margin: 10px 0 0;
+
+    li {
+      display: inline-block;
+      padding-right: 30px;
+
+      a {
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .active {
+    font-weight: 700;
+    color: $active-color;
+  }
+}

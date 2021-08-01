@@ -4,12 +4,10 @@ import accountService from "../service/accountService";
 export const UserContext = createContext({});
 
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [sessionId, setSessionId] = useState(getLocalStorageSessionId);
-
-  function getLocalStorageSessionId() {
-    return localStorage.getItem("session_id");
-  }
+  const [user, setUser] = useState(() => localStorage.getItem("user"));
+  const [sessionId, setSessionId] = useState(() =>
+    localStorage.getItem("session_id")
+  );
 
   useEffect(() => {
     if (sessionId) {

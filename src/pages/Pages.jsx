@@ -4,6 +4,9 @@ import Home from "./Home";
 import About from "./About";
 import MovieInfo from "./MovieInfo";
 import Auth from "./Auth";
+import Movie from "./Movie";
+import TvShow from "./TvShow";
+import Celebrity from "./Celebrity";
 
 export default function Pages() {
   return (
@@ -12,13 +15,19 @@ export default function Pages() {
         <Home />
       </Route>
       <Route path="/auth">
-        <Auth/>
+        <Auth />
       </Route>
       <Route path="/about">
         <About />
       </Route>
-      <Route path="/movie/:id">
-        <MovieInfo />
+      <Route path="/movies/:id/:movieTitle">
+        <Movie />
+      </Route>
+      <Route path="/tv-shows/:id/:tvShowName">
+        <TvShow />
+      </Route>
+      <Route path="/celebrities/:id/:celebrityName">
+        <Celebrity />
       </Route>
     </Switch>
   );

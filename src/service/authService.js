@@ -1,4 +1,4 @@
-import request from "../helper/request";
+import request from "../helpers/request";
 
 function createRequestToken() {
   return request.get({ path: "authentication/token/new" });

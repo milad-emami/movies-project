@@ -5,6 +5,7 @@ import useFetch from "../hooks/useFetch";
 import useMovieDb from "../hooks/useMovieDB";
 import PopularMoviesSwiper from "../components/PopularMoviesSwiper/PopularMoviesSwiper";
 import Container from "../components/Layout/Container";
+import SEO from "../components/SEO/SEO";
 
 const { Meta } = Card;
 
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <Container>
+      <SEO title="Home" />
       <Spin spinning={loading}>
         <Row gutter={[16, 16]}>
           {results.map((movie) => (

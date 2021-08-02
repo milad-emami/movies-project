@@ -1,4 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import { message } from "antd";
+import React, { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Container from "../components/Layout/Container";
 import { UserContext } from "../context/UserContext";
@@ -12,6 +13,7 @@ export default function Auth() {
   const requestToken = new URLSearchParams(location.search).get(
     "request_token"
   );
+
   useEffect(() => {
     if (requestToken) {
       authService.createSession(requestToken).then((data) => {
@@ -29,7 +31,9 @@ export default function Auth() {
 
   return (
     <Container>
-      <div style={{ color: "white" }}>you are login </div>;
+      <div style={{ color: "white" }}>
+        <h1 style={{ color: "white" }}>Hellloooooo</h1>
+      </div>
     </Container>
   );
 }
